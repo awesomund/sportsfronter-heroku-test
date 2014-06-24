@@ -1,0 +1,77 @@
+<div class="pagewrap" ng-init="init()" id="allEventsApp">
+  <header class="clearfix">
+    <h1>Dine Arrangement</h1>
+    <button class="btn btn-success" ng-click="createNewEvent()" ng-disabled="!hasTeam">
+      <i class="glyphicon-plus"></i>
+      <span class="text">Nytt arrangement</span>
+    </button>
+  </header>
+  <hr>
+
+  <table class="events table table-hover" ng-show="noEvents()">
+    <tr>
+      <th>Dine arrangement</th>
+    </tr>
+    <tr>
+      <td>Du har for øyeblikket ingen arrangementer.</td>
+    </tr>
+  </table>
+
+  <table class="events table table-hover" ng-show="coachEvents">
+    <tr>
+      <th>Som Trener:</th>
+      <th><span tooltip="Starttid"><i class="glyphicon-calendar"></i></span></th>
+      <th><span tooltip="Oppmøte"><i class="glyphicon-users"></i></span></th>
+      <th><span tooltip="Sendt"><i class="icon-send"></i></span></th>
+
+    </tr>
+
+    <tr ng-repeat="event in coachEvents | orderBy:'eventDateTime'" class="{{ event.expired }}" ng-click="redirectToEvent(event.id)">
+      <td>{{event.title}}</td>
+      <td>{{event.date}}<br>{{event.meetupTime}}</td>
+      <td>
+        <span class="label label-success">{{event.nrOfAttendees}}</span><br>
+        <span class="label label-important">{{event.nfOfNotAttendees}}</span>
+      </td>
+      <td><i ng-hide="!event.sent" class="glyphicon-ok"></i> <i ng-hide="event.sent" class="glyphicon-remove"></i></td>
+    </tr>
+  </table>
+
+  <table class="events table table-hover" ng-show="playerEvents">
+    <tr>
+      <th>Som Spiller:</th>
+      <th><span tooltip="Starttid"><i class="glyphicon-calendar"></i></span></th>
+      <th><span tooltip="Oppmøte"><i class="glyphicon-users"></i></span></th>
+      <th><span tooltip="Ditt svar"><i class="glyphicon-user"></i></span></th>
+    </tr>
+    <tr ng-repeat="event in playerEvents | orderBy:'eventDateTime'" class="{{ event.expired }}" ng-click="redirectToRSVP(event.id)">
+      <td>{{event.title}}</td>
+      <td>{{event.date}}<br>{{event.meetupTime}}</td>
+      <td>
+        <span class="label label-success">{{event.nrOfAttendees}}</span><br>
+        <span class="label label-important">{{event.nfOfNotAttendees}}</span>
+      </td>
+      <td><span class="{{event.labelClass}}">{{event.answer}}</span></td>
+    </tr>
+  </table>
+
+  <table class="events table table-hover" ng-show="guardianEvents">
+    <tr>
+      <th>Som Foresatt:</th>
+      <th><span tooltip="Starttid"><i class="glyphicon-calendar"></i></span></th>
+      <th><span tooltip="Oppmøte"><i class="glyphicon-users"></i></span></th>
+      <th><span tooltip="Ditt svar"><i class="glyphicon-user"></i></span></th>
+    </tr>
+    <tr ng-repeat="event in guardianEvents | orderBy:'eventDateTime'" class="{{ event.expired }}" ng-click="redirectToRSVPHash(event.urlHash)">
+      <td>{{event.title}} ({{event.playerName}})</td>
+      <td>{{event.date}}<br>{{event.meetupTime}}</td>
+      <td>
+        <span class="label label-success">{{event.nrOfAttendees}}</span><br>
+        <span class="label label-important">{{event.nfOfNotAttendees}}</span>
+      </td>
+      <td><span class="{{event.labelClass}}">{{event.playerAnswer}}</span></td>
+    </tr>
+  </table>
+
+</div>
+

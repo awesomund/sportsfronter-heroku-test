@@ -1,0 +1,18 @@
+.label {
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #fff;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #888;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.label-important { background-color: #c65345; }
+.label-success { background-color: #74b05d; }
+.label-warning { background-color: #e9ae5a; }
+.label-inactive { background-color: #ccc; }

@@ -1,0 +1,156 @@
+.navigation {
+  background-color: #eee;
+  border-bottom: 1px solid darkgrey;
+  margin-bottom: 10px;
+  height: 60px;
+
+  .nav-btn, .back-btn, .user-btn {
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: moz-none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .nav-btn {
+    display: block;
+    float: left;
+    text-align: center;
+    padding: 8px 15px;
+    cursor: pointer;
+    height: 60px;
+
+    &.open, &:hover {
+      background: #fff;
+      border-left: 1px solid darkgrey;
+      border-right: 1px solid darkgrey;
+    }
+
+    i {
+      font-size: 1.5em;
+      position: relative;
+      //top: 4px;
+    }
+  }
+
+  .dropdown-menu-icon{
+    left: -5px;
+    top: 5px;
+  }
+  
+  a {
+    color: black;
+    font-family: Helvetica Neue;
+    text-align: left;
+  }
+  .text {
+    font-size: 0.9em;
+    padding-left: 3px;
+  }
+
+  .logo {
+    margin-right: 10px;
+    position: relative;
+    top: 13px;
+    left: 10px;
+    @include breakpoint(rat) { 
+      display: none;
+    }
+    &.show-logo {
+      @include breakpoint(rat) { 
+        display: block;
+      }
+    }
+  }
+
+  .nav-icon-btn {
+    padding: 0;
+    border-left: 1px solid rgba(0,0,0,0);
+    border-right: 1px solid rgba(0,0,0,0);
+
+    &:hover {
+      padding: 0;
+    }
+    a {
+      padding: 8px 15px;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .nav-icon-btn-image {
+    top: 12px;
+  }
+
+  .user-btn {
+    float: right;
+  }
+
+  .dropdown-menu {
+    top: 58px;
+    border: 1px solid darkgrey;
+    border-top: none;
+    border-radius: 0;
+  }
+
+  .dropdown-menu-left {
+    left: -10px;
+  }
+
+  .dropdown-menu-right {
+    right: -10px;
+    left: initial;
+  }
+
+  .dropdown-toggle {
+    display: block;
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .back-btn {
+    display: none;
+    padding: 7px 14px;
+    float: left;
+    height: 60px;
+    @include breakpoint(rat) {
+      display: block;
+    }
+
+    &:hover {
+      padding: 7px 13px;
+      background: #ddd;
+      border-left: 1px solid darkgrey;
+      border-right: 1px solid darkgrey;
+      cursor: pointer;
+    }
+
+    &:active {
+      background: #aaa;
+    }
+
+    i {
+      font-size: 1.3em;
+      position: relative;
+      top: 13px
+    }
+  }
+
+  .nav-btn .dropdown-menu .dropdown-icon i {
+    top: 5px;
+    font-size: 1.2em;
+  }
+
+  .btn-navigation .text {
+    font-size: 1em;
+    padding-left: 0;
+    
+    @include breakpoint(rat) {
+      display: none;
+    }
+  }
+}

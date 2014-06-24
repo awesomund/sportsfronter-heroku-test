@@ -1,0 +1,271 @@
+<div class="pagewrap" ng-init="init()">
+    <div class="slim">
+        
+        <p>
+            <h1>
+                Knytt deg til spiller
+            </h1>
+        </p>
+
+        <p>
+            For å fullføre registreringen som foresatt, må du knytte deg til en eller flere spillere på <strong>{{teamName}}</strong>.
+        </p>
+
+        <p>
+            <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}} <strong>{{alert.comment}}</strong></alert>
+
+            <div>
+                <h3 ng-hide="showNewGuardianPlayerForm || showConnectToPlayerWindow || showExistingPlayersForm">
+                    Spillere
+                </h3>
+
+                <p>
+                    Trykk på en spiller for å registrere deg som foresatt.
+                </p>
+            </div>
+
+            <h3 ng-show="showNewGuardianPlayerForm && !showConnectToPlayerWindow && !showExistingPlayersForm">
+            Legg til ny spiller
+            </h3>
+
+            <h3 ng-show="showConnectToPlayerWindow && !showNewGuardianPlayerForm && !showExistingPlayersForm">
+            Registrer deg som foresatt for spiller
+            </h3>
+
+        </p>
+
+        <div ng-show="showExistingPlayersForm">
+
+            <h3>Eksisterende spillere</h3>
+
+            <p>Det finnes allerede en eller flere spillere med navnet du oppgav:</p>
+
+            <div ng-show="showExistingPlayersForm">
+                <h4>
+                    Spillerinfo:
+                </h4>
+
+                <div class="well" ng-repeat="existingPlayer in existingPlayers">
+
+                    <div>
+                        <label>Fornavn<span class="text-error">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                            <input id="firstname" name="firstname" type="text" ng-model="existingPlayer.firstName" ng-disabled="true">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="lastname">Etternavn<span class="text-error">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                            <input id="lastname" name="lastname" type="text" ng-model="existingPlayer.lastName" ng-disabled="true">
+                        </div>
+                    </div>
+                    <div>
+                        <label>Telefonnummer</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-phone"></i></span>
+                            <input type="text" ng-model="existingPlayer.phoneNumber" ng-disabled="true">
+                        </div>
+                    </div>
+                    <div>
+                        <label>Fødselsdato</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                            <input type="text" ng-model="existingPlayer.dateOfBirth" ng-disabled="true">
+                        </div>
+                    </div>
+                    <p>
+                        <h4>
+                            Foresatte:
+                        </h4>
+                        <p>
+                            <table class="table" ng-show="existingPlayer.guardians">
+                                <th>Navn</th>
+                                <th>Epost</th>
+                                <tr ng-repeat="guardian in existingPlayer.guardians">
+                                    <td>
+                                        {{guardian.firstName}} {{guardian.lastName}}
+                                    </td>
+                                    <td>
+                                        {{guardian.email}}
+                                    </td>
+                                </tr>
+                            </table>
+                            <div ng-hide="existingPlayer.guardians">
+                                Ingen foresatte er registrert for denne spilleren enda.
+                            </div>
+                        </p>
+                    </p>
+
+
+                <p>
+                    <p>
+                        Er dette spilleren du mente?
+                    </p>
+                    <p>
+                        <button class="btn btn-large btn-block btn-primary" ng-click="connectGuardianToPlayer(existingPlayer)">Ja</button>
+                        <button class="btn btn-large btn-block btn-danger" ng-click="saveNewGuardianPlayer(true)">Nei</button>
+                    </p>
+                </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="well" ng-show="showConnectToPlayerWindow">
+
+            <h4>
+                Spillerinfo:
+            </h4>
+
+            <div>
+                <label>Epost/brukernavn<span class="text-error">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                    <input id="firstname" name="firstname" type="text" ng-model="selectedPlayer.username" ng-disabled="true">
+                </div>
+            </div>
+
+            <div>
+                <label>Fornavn<span class="text-error">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                    <input id="firstname" name="firstname" type="text" ng-model="selectedPlayer.firstName" ng-disabled="true">
+                </div>
+            </div>
+
+            <div>
+                <label for="lastname">Etternavn<span class="text-error">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                    <input id="lastname" name="lastname" type="text" ng-model="selectedPlayer.lastName" ng-disabled="true">
+                </div>
+            </div>
+
+            <div>
+                <label>Telefonnummer</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-phone"></i></span>
+                    <input type="text" ng-model="selectedPlayer.phoneNumber">
+                </div>
+            </div>
+
+            <div>
+                <div class="col-date">
+                    <label>Dag<span class="text-error"></span></label> 
+                    <select ng-model="date" ng-options="d for d in dates"></select>
+                </div>
+                <div class="col-date">
+                    <label>Måned<span class="text-error"></span></label>
+                    <select ng-model="month" ng-options="m for m in months" ng-change="setDates()"></select> 
+                </div>
+                <div class="col-date">
+                    <label>År<span class="text-error"></span></label>
+                    <select ng-model="year" ng-options="y for y in years" ng-change="setDates()"></select>
+                </div>
+            </div>
+
+            <p>
+                <h4>
+                    Foresatte:
+                </h4>
+
+                <p>
+                    <table class="table" ng-show="selectedPlayer.guardians">
+                        <th>Navn</th>
+                        <th>Epost</th>
+                        <tr ng-repeat="guardian in selectedPlayer.guardians">
+                            <td>
+                                {{guardian.name}}
+                            </td>
+                            <td>
+                                {{guardian.email}}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div ng-hide="selectedPlayer.guardians">
+                        Ingen foresatte er registrert for denne spilleren enda.
+                    </div>
+                </p>
+            </p>
+
+    
+        </div>
+
+        <div ng-show="guardianPlayers && !showNewGuardianPlayerForm && !showConnectToPlayerWindow && !showExistingPlayersForm">
+            <table class="table table-hover clickable"> 
+              <tr>
+                <th ng-click="sortTable('firstName')">Spiller</th>
+                <th ng-click="sortTable('dateOfBirth')">Født</th>
+                <th ng-click="sortTable('phoneNumber')">#</th>
+              </tr>
+              <tr ng-repeat="teamPlayer in teamPlayers | orderBy:predicate:direction" target="_self" ng-click="selectPlayer(teamPlayer)">
+                <td>{{ teamPlayer.firstName }} {{ teamPlayer.lastName }}</td>
+                <td>{{ teamPlayer.dateOfBirth }}</td>
+                <td>{{ teamPlayer.shirtNumber }} </td> 
+              </tr>
+            </table>
+        </div>
+
+        <form name="newGuardianPlayerForm" novalidate ng-model="newGuardianPlayerForm">
+            <div class="well" ng-show="showNewGuardianPlayerForm && !showExistingPlayersForm">
+
+                <div>
+                    <label>Fornavn<span class="text-error">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                        <input id="firstname" name="firstname" type="text" ng-model="newGuardianPlayer.firstName" required>
+                    </div>
+                </div>
+    
+                <div>
+                    <label for="lastname">Etternavn<span class="text-error">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                        <input id="lastname" name="lastname" type="text" ng-model="newGuardianPlayer.lastName" required>
+                    </div>
+                </div>
+    
+                <div>
+                    <label>Telefonnummer</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-phone"></i></span>
+                        <input type="text" ng-model="newGuardianPlayer.phoneNumber">
+                    </div>
+                </div>
+    
+                <div>
+                    <div>
+                        <label>Fødselsdag<span class="text-error"></span></label> 
+                        <select ng-model="date" ng-options="d for d in dates"></select>
+                    </div>
+                    <div>
+                        <label>Måned<span class="text-error"></span></label>
+                        <select ng-model="month" ng-options="m for m in months" ng-change="setDates()"></select> 
+                    </div>
+                    <div>
+                        <label>År<span class="text-error"></span></label>
+                        <select ng-model="year" ng-options="y for y in years" ng-change="setDates()"></select>
+                    </div>
+                </div>
+    
+            </div>
+        </form>
+
+        <button ng-hide="showNewGuardianPlayerForm || showConnectToPlayerWindow || showExistingPlayersForm"
+        class="btn btn-success btn-large btn-block" ng-click="showNewGuardianPlayerForm=true;">Legg til ny spiller</button>
+
+        <button ng-hide="showConnectToPlayerWindow || showNewGuardianPlayerForm || showExistingPlayersForm || !guardianRegistered"
+        class="btn btn-primary btn-large btn-block" ng-click="finish()">Fullfør</button>
+
+        <button ng-show="showNewGuardianPlayerForm && !showExistingPlayersForm" class="btn btn-primary btn-large btn-block" ng-click="saveNewGuardianPlayer(false)">Lagre spiller</button>
+        <button ng-show="showNewGuardianPlayerForm && !showExistingPlayersForm" class="btn btn-large btn-block" ng-click="showNewGuardianPlayerForm=false;">Tilbake</button>
+
+        <button ng-show="showConnectToPlayerWindow" class="btn btn-primary btn-large btn-block" ng-click="connectGuardianToPlayer(selectedPlayer)">OK</button>
+        <button ng-show="showConnectToPlayerWindow" class="btn btn-large btn-block" ng-click="showConnectToPlayerWindow=false;">Avbryt</button>
+        
+    </div>
+</div>

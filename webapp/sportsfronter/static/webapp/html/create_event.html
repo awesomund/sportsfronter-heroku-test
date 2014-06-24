@@ -1,0 +1,294 @@
+<div class="pagewrap" ng-init="init()">
+	<div class="grid">
+
+		<h3 ng-show="isNewEvent">Nytt Arrangement</h3>
+		<h3 ng-hide="isNewEvent">Redigér Arrangement</h3>
+
+		<div class="well" ng-show="eventGroupId">
+			<div class="inline-image-container">
+				<i class="glyphicon-exclamation-sign event-exclamation-sign"></i>
+			</div>
+      		<p style="display: inline-block; width: 70%; margin: 0px 10px;">
+      			Arrangementet er del av arrangementsgruppen <strong>{{eventGroupTitle}}</strong>.
+				Vil du redigere alle arrangementer i gruppen, eller bare dette?
+			</p>
+			<p>
+				<form>
+					<input type="radio" ng-model="editAllEventsInGroup" value="1" checked>
+					 Oppdater alle arrangement i gruppen (<strong>NB: </strong>Dato må endres individuelt)<br>
+					<input type="radio" ng-model="editAllEventsInGroup" value="0">
+					 Rediger kun dette arrangementet<br>
+				</form>
+			</p>
+		</div>
+
+		<div ng-class="{notvalid: myForm.title.$invalid && submitted}">
+			<label>Navn på arrangement <span class="text-error">*</span></label>
+			<input type="text" placeholder="Hva heter arrangementet?" name="title" class="title" ng-model="title" required>
+			<hr>
+		</div>
+		<div>
+			<label>Sted/adresse (husk å sjekke adressen i Google Maps)<span class="text-error">*</span></label>
+			<div class="input-group" ng-class="{notvalid: myForm.location.$invalid && submitted}">
+				<span class="input-group-addon"><i class="glyphicon-map-marker"></i></span>
+				<input type="text"  placeholder="Hvor skjer det?" name="location" class="location" ng-model="location" required>
+			</div>
+			<div class="col-date">
+				<label>Dato<span class="text-error">*</span></label>
+				<div class="input-group">
+				<select ng-model="date" ng-options="d for d in dates" ng-change="setLastSignupTime()" ng-disabled="disableDates"></select>
+				</div>
+			</div>
+			<div class="col-date">
+				<label>Måned<span class="text-error">*</span></label>
+			<select ng-model="month" ng-options="m for m in months" ng-change="setDates();setLastSignupTime();" ng-disabled="disableDates"></select>
+			</div>
+			<div class="col-date">
+				<label>År<span class="text-error">*</span></label>
+				<select ng-model="year" ng-options="y for y in years" ng-change="setDates();setLastSignupTime();" ng-disabled="disableDates">></select>
+			</div>
+		</div>	
+		<div ng-class="{notvalidtime: invalidStartTime}">
+			<div style="display: inline-block; width: 50%">
+				<label>Oppmøte<span class="text-error">*</span></label>
+				<select ng-model="meetupTimeOffset" ng-change="setMeetupTime();setLastSignupTime();" ng-options="m for m in meetupMinutes"></select>
+			</div>
+			<div class="sidelabel">
+				<label>minutter før start</label>
+			</div>
+		</div>
+		<div ng-class="{notvalidtime: invalidStartTime}">
+			<div style="width: 49%; display: inline-block">
+				<label>Starttid <span class="text-error">*</span></label>
+				<div>
+					<select ng-model="startHour" ng-change="setEndTime();setMeetupTime();setLastSignupTime();" ng-options="h for h in hours"></select>
+				</div>
+			</div>
+			<div style="width: 49%; display: inline-block">
+				<label>Minutt<span class="text-error">*</span></label>
+				<select ng-model="startMinute" ng-change="setMeetupTime();setEndTime();setLastSignupTime();" ng-options="m for m in minutes"></select>
+			</div>
+		</div>
+		<div ng-class="{notvalidtime: invalidStartTime}">
+			<div style="width: 49%; display: inline-block">
+				<label>Sluttid <span class="text-error">*</span></label>
+				<div>
+					<select ng-model="endHour" ng-change="setStartTime()" ng-options="h for h in hours"></select>
+				</div>
+			</div>
+			<div style="width: 49%; display: inline-block">
+				<label>Minutt<span class="text-error">*</span></label>
+				<select ng-model="endMinute" ng-change="setStartTime()" ng-options="m for m in minutes"></select>
+			</div>
+		</div>
+		<div>
+			<alert ng-repeat="dateAlert in dateAlerts" type="alert.type" close="closeDateAlert($index)"><strong>{{dateAlert.msg}}</strong></alert>
+		</div>
+		<div>
+			<label>Annen informasjon</label>
+			<textarea rows="3" placeholder="F.eks. huskeliste eller kjøreplanlegging" ng-model="information"></textarea>
+		</div>
+		<div>
+			<label>Motstander</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<i class="glyphicon-flag"></i>
+				</span>
+				<input type="text" class="opponent" placeholder="Hvem spiller dere mot?" ng-model="opponent">
+			</div>
+		</div>
+		<div ng-show="isNewEvent">
+			<label>Velg Lag<span class="text-error">*</span></label>
+			<select ng-model="team" ng-options="teamOption.name for teamOption in teams"
+			ng-change="fetchAttendees();defineExtraTeams();toggleDisable()">
+			<option value="" disabled="disabled">Velg lag</option>
+			</select>
+		</div>
+		<div ng-hide="isNewEvent">
+			<label>Velg Lag<span class="text-error">*</span></label>
+			<select disabled>
+				<option>{{team.name}}</option>
+			</select>
+		</div>
+		<br>
+		<div id="recipientlist" class="well attendees-container" ng-show="team">
+			<table class="table table-striped" ng-show="team">
+				<tr>
+				<th><input type="checkbox" ng-model="checkedValue"></th>
+				<th>Navn</th>
+				<th>Epost</th>
+				</tr>
+				<tr ng-repeat="attendee in attendees">
+					<td>
+						<input type="checkbox" ng-model="attendee.attending"/>
+					</td>
+					<td>{{attendee.firstName}} {{ attendee.lastName }}</td>
+					<td>{{attendee.email}}</td>
+				</tr>
+			</table>
+		</div>
+		<label>Ekstra Mottakere (valgfritt):</label>
+		<div class="well">
+			<div>
+				<select ng-model="extraTeamIndex" ng-change="fetchExtraPlayers()">
+					<option value="" disabled="disabled">{{extra_teams_placeholder}}</option>
+					<option ng-repeat="extraTeamOption in extraTeams" ng-disabled="extraTeamOption.disabled" value="{{ $index }}">
+						{{extraTeamOption.name}}
+					</option>
+				</select>
+			</div>
+			<br>
+
+			<div id="extraRecipientlist" class="well attendees-container" ng-show="extraTeamSelected">
+				<table class="table table-striped">
+					<tr>
+						<th><input type="checkbox" ng-model="extraPlayersCheckedValue"></th>
+						<th>Navn</th>
+						<th>Epost</th>
+					</tr>
+					<tr ng-repeat="extraPlayer in extraPlayers">
+						<td>
+							<input type="checkbox" ng-model="extraPlayer.attending"/>
+						</td>
+						<td>{{extraPlayer.firstName}} {{ extraPlayer.lastName }}</td>
+						<td>{{extraPlayer.email}}</td>
+					</tr>
+				</table>
+			</div>
+
+			<div>
+				<button type="submit" class="btn btn-primary" ng-click="addExtraAttendees()" ng-show="extraTeamSelected">
+					<i class="icon-add-user"></i>
+					Legg spillere til mottakerliste
+				</button>
+			</div>
+		</div>
+
+		<hr>
+
+		<p>
+			<div>
+				<span>Påmeldingsfrist:</span><input type="checkbox" ng-model="useLastSignupDate" style="float: right; margin-right: 20px;">
+			</div>
+
+			<div ng-show="useLastSignupDate">
+				<div class="col-date">
+					<label>Dato<span class="text-error">*</span></label>
+					<div class="input-group">
+					<select ng-model="lastSignupDate" ng-options="d for d in lastSignupDates" ng-change="checkLastSignupTime()" ng-disabled="disableDates"></select>
+					</div>
+				</div>
+				<div class="col-date">
+					<label>Måned<span class="text-error">*</span></label>
+				<select ng-model="lastSignupMonth" ng-options="m for m in months" ng-change="setLastSignupDates();checkLastSignupTime()" ng-disabled="disableDates"></select>
+				</div>
+				<div class="col-date">
+					<label>År<span class="text-error">*</span></label>
+					<select ng-model="lastSignupYear" ng-options="y for y in years" ng-change="setLastSignupDates();checkLastSignupTime()" ng-disabled="disableDates">></select>
+				</div>
+				<div ng-class="{notvalidtime: invalidStartTime}">
+					<div style="width: 49%; display: inline-block">
+						<label>Time<span class="text-error">*</span></label>
+						<div>
+							<select ng-model="lastSignupHour" ng-options="h for h in hours" ng-change="checkLastSignupTime()"></select>
+						</div>
+					</div>
+					<div style="width: 49%; display: inline-block">
+						<label>Minutt<span class="text-error">*</span></label>
+						<select ng-model="lastSignupMinute" ng-options="m for m in minutes" ng-change="checkLastSignupTime()"></select>
+					</div>
+				</div>
+			</div>
+		</p>	
+
+		<hr>
+
+		<div ng-hide="eventId">
+			<span>Gjentagende arrangement? </span><input type="checkbox" ng-model="recurringEvent" style="float: right; margin-right: 20px;">
+		
+			<div ng-show="recurringEvent && !eventId">
+				<div>
+					<div class="col-date">
+						<label>Startdato<span class="text-error">*</span></label>
+						<div class="input-group">
+						<select ng-model="recurringEventStartDate" ng-options="d for d in recurringEventStartDates"></select>
+						</div>
+					</div>
+					<div class="col-date">
+						<label>Måned<span class="text-error">*</span></label>
+					<select ng-model="month" ng-options="m for m in months" ng-change="setRecurringEventStartDates();"></select>
+					</div>
+					<div class="col-date">
+						<label>År<span class="text-error">*</span></label>
+						<select ng-model="recurringEventStartYear" ng-options="y for y in years" ng-change="setRecurringEventStartDates();">></select>
+					</div>
+				</div>
+
+				<div>
+					<div class="col-date">
+						<label>Sluttdato<span class="text-error">*</span></label>
+						<div class="input-group">
+						<select ng-model="recurringEventEndDate" ng-options="d for d in recurringEventEndDates"></select>
+						</div>
+					</div>
+					<div class="col-date">
+						<label>Måned<span class="text-error">*</span></label>
+					<select ng-model="recurringEventEndMonth" ng-options="m for m in recurringEventEndMonths" ng-change="setRecurringEventEndDates();"></select>
+					</div>
+					<div class="col-date">
+						<label>År<span class="text-error">*</span></label>
+						<select ng-model="recurringEventEndYear" ng-options="y for y in years" ng-change="setRecurringEventEndDates();">></select>
+					</div>
+				</div>
+
+				<label>Frekvens:</label>
+				<form action="">
+					<input type="radio" ng-model="recurringEventFrequency" value="1">Ukentlig<br>
+					<input type="radio" ng-model="recurringEventFrequency" value="2">Månedlig
+				</form>
+
+				<div ng-show="isNewEvent && recurringEvent">
+					<label>Tittel på arrangement-gruppe (eks: torsdagstreninger. Ikke obigatorisk.):</label>
+					<input type="text" ng-model="eventGroupTitle">
+				</div>
+
+			</div>
+
+			<hr>
+
+		</div>
+
+		<div>
+			<div>Påminnelse/purring (0 = ingen påminnelse):</div>
+			<div>
+				Send påminnelse <input ng-model="reminderTime" style="display:inline-block; width: 10%" type="text"> dager før.
+			</div>
+			<hr>
+		</div>
+
+		<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><strong>{{alert.comment}}</strong>{{alert.msg}}</alert>
+
+		<button type="submit" class="btn btn-primary btn-large btn-block" ng-click="saveEvent(true, false)" ng-hide="!isNewEvent">
+			<i class="icon-send"></i> Send<br>
+			<label>Pushmelding/epost sendes til mottakere</label>
+		</button>
+		<button type="submit" class="btn btn-primary btn-large btn-block" ng-click="saveEvent(true, false)" ng-hide="isNewEvent">
+			<i class="icon-send"></i> Send<br>
+			<label>Sender epost og push</label>
+		</button>
+		<button type="submit" class="btn btn-primary btn-large btn-block" ng-click="saveEvent(false, true)">
+			Publiser<br>
+			<label>Publiser uten epost/-pushmelding</label>
+		</button>
+		<button type="submit" class="btn btn-primary btn-large btn-block" ng-click="saveEvent(false, false)">
+			Lagre<br>
+			<label>Arrangementet vises kun for lagleder</label>
+		</button>
+		<button class="btn btn-danger btn-large btn-block" ng-hide="isNewEvent" ng-click="deleteEvent()">
+			<i class="glyphicon-trash"></i> Slett Arrangement
+		</button>
+		<!-- blir alltid vist: -->
+		<button type="submit" class="btn btn-large btn-block" ng-click="cancelEventInvite()">Avbryt</button>
+		
+	</div>
+</div>

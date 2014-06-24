@@ -1,0 +1,62 @@
+<div class="pagewrap" ng-init="init()">
+  <header class="clearfix">
+    <h1>{{teamName}}</h1>
+    </header>
+
+    <hr>
+
+    <div class="well" ng-show="userIsCoach">
+
+      <p>
+        Du kan hente arrangementer fra NFF til Sportsfronter! Dette gjør du ved å finne URLen til ditt lags arrangements-kalender i NFF, og lime den inn under.
+      </p>
+
+      <p>
+        <div>Instruksjoner:</div>
+        <ol>
+          <li>
+            Gå inn på <a href="http://www.fotball.no/System-pages/Kretser-og-klubber/Klubber_og_lag/" target="_blank">denne lenken</a>
+          </li>
+          <li>
+            Bruk søkefeltet til å finne laget ditt:
+          </li>
+          <li>
+            Klikk "LAG"-fanen
+          </li>
+          <li>
+            Klikk på laget ditt i listen.
+            <hr>
+            <img src="/static/webapp/img/nff/search.jpg" class="list-image"><br>
+            <hr>
+          </li>
+          <li>
+            Du vil nå se en tabell over lagets kamper. Klikk på "Last ned kampene til din kalender" over tabellen.<br>
+            <hr>
+            <img src="/static/webapp/img/nff/kalenderlink.jpg" class="list-image"><br>
+            <hr>
+          </li>
+          <li>
+            Kopier lenken i vinduet som dukker opp.
+            <hr>
+            <img src="/static/webapp/img/nff/kopier_link.jpg" class="list-image"><br>
+            <hr>
+          </li>
+          <li>
+            Lim lenken inn i tekstfeltet under, og trykk "Hent arrangement".
+          </li>
+        </ol>
+      </p>
+
+      <p>
+        URL fra NFF: <br>
+        <input type="text" ng-model="nffUrl"></input>
+      </p>
+
+      <button class="btn btn-primary" ng-click="getICSViaBackend()">
+        Hent arrangement
+      </button>
+
+    </div>
+
+    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><strong>{{ alert.comment }}</strong>{{alert.msg}}</alert>
+  </div>

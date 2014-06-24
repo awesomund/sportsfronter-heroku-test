@@ -1,0 +1,100 @@
+<div class="pagewrap" ng-init="init()">
+    <alert ng-repeat="alert in alerts" type="alert.type" ng-click="closeAlert($index)" close="closeAlert($index)">
+    <strong> {{alert.msg}}</strong>
+    </alert>
+    <div class="jumbotron login-jumbotron">
+        <div ng-show="teamId">
+            <h1 ng-show="teamId">Bli med på laget!</h1>
+            <p ng-show="teamId"><strong>{{coachName}}</strong> på <strong>{{teamName}}</strong> vil sende deg invitasjoner til lagets arrangementer.</p>
+            <p ng-show="teamId">Logg inn hvis du allerede har en konto, eller registrer deg som ny bruker.</p>
+        </div>
+
+        <div ng-hide="teamId">
+            <h1 ng-hide="teamId">Registrer deg</h1>
+            <p ng-hide="teamId">Bli en Sportsfronter!</p>
+        </div>
+
+        <p class="login-group" ng-show="teamId && !modeSelected">
+            <button class="btn btn-primary btn-large btn-block" ng-click="goToLoginPage()">Logg inn</button>
+            <em>eller</em>
+            <button class="btn btn-success btn-large btn-block" ng-click="goToRegisterPage()">Registrer ny bruker</button>
+        </p>
+
+        <div ng-show="!teamId || modeSelected">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon-envelope"></i></span>
+                <input type="email" ng-model="username" placeholder="Din epostadresse" ng-enter="finish()">
+            </div>
+            <hr>
+            <div class="input-group" ng-show="newUser">
+                <span class="input-group-addon"><i class="glyphicon-envelope"></i></span>
+                <input type="email" ng-model="username2" placeholder="Gjenta epost" ng-enter="finish()">
+            </div>
+            <hr ng-show="newUser">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-keys"></i></span>
+                <input type="password" ng-model="password" placeholder="Velg et passord" ng-enter="finish()">
+            </div>
+            <hr>
+            <div class="input-group" ng-show="newUser">
+                <span class="input-group-addon"><i class="icon-keys"></i></span>
+                <input type="password" ng-model="password2" placeholder="Gjenta passord" ng-enter="finish()">
+            </div>
+            <hr ng-show="newUser">
+            <div class="input-group" ng-show="newUser" >
+                <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                <input type="text" ng-model="firstName" placeholder="Ditt fornavn" ng-enter="finish()">
+            </div>
+            <hr ng-show="newUser" >
+            <div class="input-group" ng-show="newUser">
+                <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                <input type="text" ng-model="lastName" placeholder="Ditt etternavn" ng-enter="finish()">
+            </div>
+            <hr ng-show="newUser" >
+            <div class="well" ng-show="teamId">
+                <p>
+                    Din rolle på laget:
+                </p>
+                <div>
+                    <p>
+                        <input type="checkbox" ng-model="userRoles.player"> Spiller
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <input type="checkbox" ng-model="userRoles.guardian"> Foresatt
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <input type="checkbox" ng-model="userRoles.manager"> Lagleder
+                    </p>
+                </div>
+            </div>
+
+            <div class="login-group">
+                <button ng-show="newUser" class="btn btn-success btn-large btn-block" ng-click="register()">Registrer deg</button>
+                <button ng-hide="newUser" class="btn btn-primary btn-large btn-block" ng-click="firstLogin()">Logg inn</button>
+                <button ng-show="modeSelected && teamId" class="btn btn-large btn-block" ng-click="modeSelected=false;">Tilbake</button>
+                <em ng-hide="modeSelected">eller</em>
+                <button ng-hide="teamId" class="btn btn-primary btn-large btn-block" ng-click="goToLoginPage()">
+                    <i class="icon-new-window"></i>
+                    <span>Logg inn her!</span>
+                </button>
+            </div>
+
+        </div>
+
+        <p style="font-size: 18px" ng-show="modeSelected && !newUser">
+            Glemt passordet ditt? <a ng-href="{{forgotPasswordURL}}">Klikk her!</a>
+        </p>
+
+        <p ng-show="teamId" class="well">
+            <em>
+                Du kan være tilkoplet mange lag og ha ulike roller med samme brukerkonto. <br>
+                Har du ikke brukerkonto, kan du registrere det raskt her.
+            </em>
+        </p>
+
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="pagewrap" ng-init="init()">
+    <div class="grid">
+        <div class="col-1-1">
+            <label>Lagnavn <span class="text-error">*</span></label>
+            <input type="text" placeholder="Skriv inn lagnavn" class="title" ng-model="teamName" ng-enter="createTeam()">
+            <hr>
+        </div>
+
+        <div class="col-1-1">
+            <button class="btn" ng-click="cancel()">Avbryt</button>
+            <button class="btn btn-primary" ng-click="createTeam()">Lagre</button> 
+        </div>
+
+        <div class="col-1-1"> 
+            <alert ng-repeat="alert in alerts" class="alert" type="alert.type" ng-click="closeAlert($index)" close="closeAlert($index)">{{alert.msg}} <strong>{{alert.comment}}</strong></alert>
+        </div>
+    </div>
+</div>
+</div> <!-- end of class pagewrap -->

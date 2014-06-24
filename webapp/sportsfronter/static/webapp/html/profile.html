@@ -1,0 +1,90 @@
+<div class="pagewrap" ng-init="init()" id="allEventsApp">
+  <header class="clearfix">
+    <h1>Min Profil</h1>
+    
+  </header>
+  <hr>
+
+    <div class="well">
+    <div class="grid">
+    <form name="addPlayerForm" novalidate ng-model="addPlayerForm">
+      <div>
+
+        <div>
+          <label for="email">Epost/Brukernavn</label>
+          <div class="input-group" ng-class="{notvalid: addPlayerForm.email.$invalid && submitted}">
+            <span class="input-group-addon"><i class="glyphicon-envelope"></i></span>
+            <input id="email" type="email" name="email" ng-model="userName"
+                   autocapitalize="off" ng-required="true"/> 
+          </div>
+
+        <div>
+          <label for="firstname">Fornavn<span class="text-error">*</span></label>
+          <div class="input-group" ng-class="{notvalid: addPlayerForm.firstname.$invalid && submitted}">
+            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+            <input id="firstname" name="firstname" type="text" placeholder="Fornavn" ng-model="firstName" required>
+          </div>
+        </div>
+  
+        <div>
+          <label for="lastname">Etternavn <span class="text-error">*</span></label>
+          <div class="input-group" ng-class="{notvalid: addPlayerForm.lastname.$invalid && submitted}">
+            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+            <input id="lastname" name="lastname" type="text" placeholder="Etternavn" ng-model="lastName" required>
+          </div>
+        </div>
+
+        </div>
+
+      <div>
+        <div ng-class="{notvalid: addPlayerForm.date.$invalid && submitted}">
+          <div class="col-date">
+              <label>Fødselsdato<span class="text-error">*</span></label> 
+                <select ng-model="date" ng-options="d for d in dates" >
+                  <option></option>
+                </select>
+            </div>
+            <div class="col-date">
+              <label>Måned<span class="text-error">*</span></label>
+              <select ng-model="month" ng-options="m for m in months">
+                <option></option>
+              </select> 
+            </div>
+            <div class="col-date">
+              <label>År<span class="text-error">*</span></label>
+              <select ng-model="year" ng-options="y for y in years">
+                <option></option>
+              </select>
+            </div>
+        </div>
+        
+       <div>
+          <label for="phonenumber">Telefon</label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon-phone"></i></span>
+            <input id="phonenumber" type="text" placeholder="Spillers telefonnummer" ng-model="phoneNumber">
+          </div>
+        </div>
+        </div>
+        </form>
+      </div>
+
+        <hr>
+      
+      <div class="col-1-1 col-padding-top">
+        <button class="btn" ng-click="cancel()">Avbryt</button>
+        <button class="btn btn-primary" ng-click="updateUserInfo()">
+          <i ng-hide="player.id"class="glyphicon-ok"></i>
+          <i ng-hide="!player.id"class="glyphicon-pencil"></i> 
+           Lagre
+        </button>         
+      </div>
+
+    </div>
+    </form>
+  </div>
+
+  <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}} <strong>{{alert.comment}}</strong></alert>
+
+</div>
+

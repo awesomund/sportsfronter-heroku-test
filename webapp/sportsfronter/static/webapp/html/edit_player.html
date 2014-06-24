@@ -1,0 +1,168 @@
+<div class="pagewrap" ng-init="init()">
+  <div class="grid">
+    <div class="col-1-2">
+      <header class="clearfix">
+      <h3 ng-hide="!player.id">{{ player.firstName }} {{ player.lastName }}</h3> 
+      </header>
+    </div>
+    <div class="col-1-2">
+      <h3 ng-hide="!player.isCoach" style="float:right;" ><i class="glyphicon-bullhorn"></i>  <i class="icon-shirt"></i> Spillende trener</h3>
+      <button class="btn btn-success"  style="float:right;" ng-hide="!player.id || player.isCoach" ng-click="addPlayerAsCoach()">
+      	<i class="glyphicon-bullhorn"></i>     
+      	Legg til som trener
+      </button>
+    </div>
+  </div>
+  <hr>
+  <div class="well">
+    <div class="grid">
+    <form name="addPlayerForm" novalidate ng-model="addPlayerForm">
+      <div>
+
+        <div>
+          <label for="email">Epost/Brukernavn</label>
+          <div class="input-group" ng-class="{notvalid: addPlayerForm.email.$invalid && submitted}">
+            <span class="input-group-addon"><i class="glyphicon-envelope"></i></span>
+            <input ng-disabled="true" id="email" type="email" name="email" ng-model="player.username"
+                   placeholder="Spillers epost" autocapitalize="off" ng-required="isPlayerEmailRequired()"/> 
+          </div>
+
+        <div>
+          <label for="firstname">Fornavn<span class="text-error">*</span></label>
+          <div class="input-group" ng-class="{notvalid: addPlayerForm.firstname.$invalid && submitted}">
+            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+            <input id="firstname" name="firstname" type="text" placeholder="Fornavn" ng-model="player.firstName" required>
+          </div>
+        </div>
+  
+        <div>
+          <label for="lastname">Etternavn <span class="text-error">*</span></label>
+          <div class="input-group" ng-class="{notvalid: addPlayerForm.lastname.$invalid && submitted}">
+            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+            <input id="lastname" name="lastname" type="text" placeholder="Etternavn" ng-model="player.lastName" required>
+          </div>
+        </div>
+
+        </div>
+
+      <div>
+        <div ng-class="{notvalid: addPlayerForm.date.$invalid && submitted}">
+          <div class="col-date">
+              <label>Fødselsdato<span class="text-error"></span></label> 
+                <select ng-model="date" ng-options="d for d in dates">
+                  <option value=""></option>
+                </select>
+            </div>
+            <div class="col-date">
+              <label>Måned<span class="text-error"></span></label>
+              <select ng-model="month" ng-options="m for m in months" ng-change="setDates()">
+                 <option value=""></option>
+              </select> 
+            </div>
+            <div class="col-date">
+              <label>År<span class="text-error"></span></label>
+              <select ng-model="year" ng-options="y for y in years" ng-change="setDates()">
+                 <option value=""></option>
+              </select>
+            </div>
+        </div>
+        
+        <div>
+          <label for="shirtNumber">Draktnummer</label>
+          <div class="input-group" >
+            <span class="input-group-addon"><i class="icon-shirt"></i></span>
+            <input id="shirtNumber" placeholder="Draktnummer" type="number" step="1" min="1" max="99" ng-model="player.shirtNumber">
+          </div>
+        </div>
+       <div>
+          <label for="phonenumber">Telefon</label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon-phone"></i></span>
+            <input id="phonenumber" type="text" placeholder="Spillers telefonnummer" ng-model="player.phoneNumber">
+          </div>
+        </div>
+      	</div>
+        </form>
+      </div>
+    <form name="addGuardianForm" novalidate ng-model="addGuardianForm">
+      <div class="col-1-1">
+
+        <hr>
+
+        <div class="add-parent-group clearfix">
+          <h3>Foresatte</h3>
+          <button class="btn btn-link" ng-click="addGuardianField()">Legg til foresatt</button>
+        </div>
+
+        <div class="grid; well" ng-repeat="guardian in guardians">
+
+          <div>
+            <label for="email">Epost <span class="text-error">*</span></label>
+            <div class="input-group" ng-class="{notvalid: addGuardianForm.email.$invalid && submitted}">
+              <span class="input-group-addon"><i class="glyphicon-envelope"></i></span>
+              <input ng-disabled="guardian.personExists" id="email" type="email" name="email"
+                     ng-blur="checkGuardianEmail(guardian)" ng-model="guardian.email" required>
+            </div>
+          </div>
+          
+          <div>
+            <label for="name">Fornavn<span class="text-error">*</span></label>
+            <div class="input-group" ng-class="{notvalid: addGuardianForm.firstname.$invalid && submitted}">
+              <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+              <input id="firstname" name="firstname" type="text" ng-model="guardian.firstName" required>
+            </div>
+          </div>
+
+          <div>
+            <label for="lastname">Etternavn<span class="text-error">*</span></label>
+            <div class="input-group" ng-class="{notvalid: addGuardianForm.lastname.$invalid && submitted}">
+              <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+              <input id="lastname" name="lastname" type="text" ng-model="guardian.lastName" required>
+            </div>
+          </div>
+
+          <div>
+            <label for="phonenumber">Telefon</label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="icon-phone"></i></span>
+              <input id="phonenumber" type="text" ng-model="guardian.phoneNumber">
+            </div>
+
+            <div>
+              <br>
+              <button class="btn" ng-click="removeGuardian($index)">
+                <i class="glyphicon-trash"></i>
+                Fjern Foresatt
+              </button>
+            </div>
+
+          </div>
+
+        </div> <!-- End ng-repeat -->
+      </div> <!-- End guardian fields -->
+
+      <hr>
+
+      <p>
+        <label>Lag:</label>
+        <select ng-model="team" ng-options="team.name for team in teams"></select>
+      </p>
+
+      <hr>
+      
+      <div class="col-1-1 col-padding-top">
+        <button class="btn" ng-click="back()">Avbryt</button>
+        <button class="btn btn-primary" ng-click="savePlayer(false)">
+        	<i ng-hide="player.id"class="glyphicon-ok"></i>
+        	<i ng-hide="!player.id"class="glyphicon-pencil"></i> 
+        	 Lagre
+        </button> 
+        <button class="btn btn-success" ng-hide="player.id" ng-click="savePlayer(true)"><i class="icon-circle-plus"></i> Lagre og legg til flere</button> 
+        <button class="btn btn-danger" ng-hide="!player.id" ng-click="removeAsPlayer()"><i class="glyphicon-trash"></i> Slett Spiller </button>
+        
+      </div>
+    </div>
+    </form>
+  </div>
+  <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}} <strong>{{alert.comment}}</strong></alert>
+</div><!-- End pagewrap -->

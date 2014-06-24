@@ -1,0 +1,20 @@
+@mixin breakpoint($point) {
+  @if $point == cat {
+    @media (max-width: 1000px) { @content; }
+  }
+  @else if $point == mat {
+    @media (max-width: 700px) { @content; }
+  }
+  @else if $point == bat {
+    @media (max-width: 640px) { @content; }
+  }
+  @else if $point == rat {
+    @media (max-width: 450px) { @content; }
+  }
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box; 
+	        box-sizing: border-box;
+}

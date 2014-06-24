@@ -1,0 +1,57 @@
+  <div class="pagewrap" ng-init="init()">
+
+    <header class="clearfix">
+      <h1>Dine Lag</h1>
+      <!-- <button ng-click="goToTeamSearch()" class="btn btn-primary"><i class="glyphicon-search"></i><span class="text"> Finn Lag</span></button> -->
+      <button ng-click="createNewTeam()" class="btn btn-success"><i class="glyphicon-plus"></i><span class="text"> Nytt Lag</span></button>
+    </header>
+    <hr>
+
+    <div ng-hide="coachTeams.length || guardianTeams.length || playerTeams.length">
+      Du har for øyeblikket ingen lag.
+    </div>
+
+    <div>
+      <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
+        <strong>{{alert.comment}}</strong>
+      </alert>
+    </div>
+
+    <table class="table table-hover clickable" ng-show="coachTeams.length">
+      <h3 ng-show="coachTeams">Trener</h3>
+      <tr>
+        <th>Lagnavn</th>
+        <th><span tooltip="Antall lagmedlemmer"><i class="glyphicon-users"></i></span></th>
+      </tr>
+      <tr ng-repeat="coachTeam in coachTeams" ng-click="gotoViewTeams(coachTeam.id, coachTeam.name)" target="_self">
+        <td >{{coachTeam.name}}</td>
+        <td>{{coachTeam.numberOfPlayers}}</td>
+      </tr>
+    </table>
+
+    <table class="table table-hover clickable" ng-show="guardianTeams.length">
+      <h3 ng-show="guardianTeams">Foresatt</h3>
+      <tr>
+        <th>Lagnavn</th>
+        <th><span tooltip="Antall lagmedlemmer"><i class="glyphicon-users"></i></span></th>
+      </tr>
+      <tr ng-repeat="guardianTeam in guardianTeams" ng-click="gotoViewTeams(guardianTeam.id, guardianTeam.name)" target="_self">
+        <td >{{guardianTeam.name}}</td>
+        <td>{{guardianTeam.numberOfPlayers}}</td>
+      </tr>
+    </table>
+
+    <table class="table table-hover clickable" ng-show="playerTeams.length">
+      <h3 ng-show="playerTeams">Spiller</h3>
+      <tr>
+        <th>Lagnavn</th>
+        <th><span tooltip="Antall lagmedlemmer"><i class="glyphicon-users"></i></span></th>
+      </tr>
+      <tr ng-repeat="playerTeam in playerTeams" ng-click="gotoViewTeams(playerTeam.id, playerTeam.name)" target="_self">
+        <td >{{playerTeam.name}}</td>
+        <td>{{playerTeam.numberOfPlayers}}</td>
+      </tr>
+    </table>
+  </div>
+
+

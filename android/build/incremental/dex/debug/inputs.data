@@ -1,0 +1,20 @@
+# incremental data. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1386145730000 1880 702033043179b6bb57ffa11fcba6be8a0afd85f5 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/com/google/android/gcm/GCMConstants.class
+1386145730000 412 ad244ee7575dd27c12c849b33cb62532cf546037 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/R$layout.class
+1386145730000 11381 6d4b9909e57a76196238dfc02968fcdd094781f5 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/com/google/android/gcm/GCMRegistrar.class
+1386145730000 511 480746ab7134019110363f980ebdd7d0f47f3793 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/Manifest$permission.class
+1386145730000 7120 822ffc6cff3d5e17862f89161f69e8e195c7424c /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/com/google/android/gcm/GCMBaseIntentService.class
+1386145730000 397 738794896430c24bfd86ba7771b734a2948391e3 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/Manifest.class
+1386145730000 358 330435e6baa35ca83f612cfb452569d957e4caff /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/R$attr.class
+1386145730000 2971 f001a6ff661db77766e5539e3ac04abf6da9dbab /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/plugin/GCM/GCMPlugin.class
+1386145730000 579 cbd1194c22652e9f0a49579451ba08d134fa2aed /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/R.class
+1386145730000 490 16b53b7e8c2670ab328840c1ae4cdd7a8ed457aa /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/R$drawable.class
+1386077525000 445463 9d2b19903fa584c04ffe986fd6969808372eff6b /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/libs/cordova-2.8.0.jar
+1386145730000 4413 9d2121b87f756046612d579c812c44ebe574cf66 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/GCMIntentService.class
+1386145730000 1578 eed91f4a08f7082221ba32c5a4beb54c195f697d /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/com/google/android/gcm/GCMBroadcastReceiver.class
+1386145730000 405 d395a5ed58c17c7ddd167e738d60ba3c09947324 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/R$xml.class
+1386145730000 933 992d52ab31367ae4e4f026a5af3e61a444d03113 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/Sportsfronter.class
+1386145730000 478 eeddd8aa6af4b37e9ad724789a404d816ea3e379 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/BuildConfig.class
+1386145730000 416 f367bbe94ebbee4b938d138ed1940285d70c1481 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/classes/debug/no/iterate/sportsfronter/R$string.class

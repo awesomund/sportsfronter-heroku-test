@@ -1,0 +1,124 @@
+<div class="pagewrap" ng-init="init()">
+  <div class="grid">
+
+    <header class="clearfix">
+      <h1>{{event.title}}</h1>
+      <button ng-click="editEvent()" class="btn btn-primary"><i class="glyphicon-pencil"></i><span class="text"> Endre</span></button>
+    </header>
+    <hr>
+
+    <div>
+      <div class="well">
+        <h3>Informasjon</h3>
+        <hr>
+        <p><i class="glyphicon-users"></i> {{ event.team.name }}</p>
+        <p><i class="glyphicon-calendar"></i>
+          <a ng-show="isIos" ng-click="createCalendarEvent()"> {{ event.date }}</a>
+          <span ng-hide="isIos"> {{ event.date }}</span>
+        </p>
+        <p>
+          <div ng-show="event.lastSignupDate.length">
+            <i class="glyphicon-exclamation-sign"></i> <strong>Påmeldingsfrist: {{ event.lastSignupDate }}, {{event.lastSignupTime}}</strong>
+          </div>
+          <div>
+            <i class="glyphicon-time"></i> Oppmøte: {{ event.meetupTime }}
+          </div>
+          <div>
+            <i class="glyphicon-time"></i> Start: {{ event.startTime }}
+          </div>
+          <div>
+            <i class="glyphicon-time"></i> Slutt: {{ event.endTime }}
+          </div>
+        </p>
+        <p><i class="glyphicon-map-marker"></i><a href="{{ event.locationUrl }}"> {{ event.location }}</a></p>
+        <p><i class="glyphicon-flag" ng-show="event.opponent"></i> {{ event.opponent }}</p>
+        <div class="event-comment">
+          <hr>
+          <h5>Kommentar</h5>
+          <p>{{event.info}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="well" ng-show="userAnswer">
+
+      <div>
+        <strong>Ditt svar:</strong>
+        <div class="btn-group" data-toggle="buttons-radio">
+          <button class="btn" id="yes" ng-click="onAnswer(1)">Ja</button>
+          <button class="btn" id="no"  ng-click="onAnswer(2) ">Nei</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="well" ng-show="coaches.length">
+      
+      <h3>Lagledere</h3>
+
+      <table class="table table-hover">
+        <tr>
+          <th ng-click="sortTable('firstName')"><i class="glyphicon-user"></th>
+          <th ng-click="sortTable('answerInt')"><i class="icon-send"></th>
+        </tr>
+        <tr ng-repeat="coach in coaches | orderBy:predicate:direction" >
+          <td>{{coach.firstName}} {{coach.lastName}}</td>
+          <td>
+            <span class="{{coach.labelClass}}" >{{ coach.answerText }}</span>
+            <button class="send-invitation-btn btn-link" ng-click="sendSingleInvitation(coach)" ng-show="coach.showSendLink">
+              <i class="icon-message-out"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+    <div>
+      <h3>Status</h3>
+
+      <hr>
+
+      <p ng-show="invitesPending" class="well">
+        Ingen invitasjoner er sendt enda.
+      </p>
+
+      <div class="progress" id="progress-attendance" ng-hide="invitesPending">
+        <div class="progress-bar progress-bar-success">
+          <span class="overlay">{{ yes }}</span>
+        </div>
+        <div class="progress-bar progress-bar-warning">
+          <span class="overlay">{{ seen }}</span>
+        </div>
+        <div class="progress-bar progress-bar-unknown">
+          <span class="overlay">{{ sent }}</span>
+        </div>
+        <div class="progress-bar progress-bar-danger">
+          <span class="overlay">{{ no }}</span>
+        </div>
+      </div>
+
+      <table class="table table-hover">
+        <tr>
+          <th ng-click="sortTable('firstName')"><i class="glyphicon-user"></th>
+          <th ng-click="sortTable('answerInt')"><i class="icon-send"></th>
+          <th ng-click="sortTable('comment')"><i class="glyphicon-comment"></th>
+          <th ng-click="sortTable('dateOfBbirth')"><i class="glyphicon-calendar"></th>
+          <th ng-click="sortTable('shirtNumber')"><i class="icon-shirt"></th>
+        </tr>
+        <tr ng-repeat="attendee in attendees | orderBy:predicate:direction" >
+          <td>{{attendee.firstName}} {{attendee.lastName}}</td>
+          <td>
+            <span class="{{attendee.labelClass}}" >{{ attendee.answer }}</span>
+            <button class="send-invitation-btn btn-link" ng-click="sendSingleInvitation(attendee)" ng-show="attendee.showSendLink">
+              <i class="icon-message-out"></i>
+            </button>
+          </td>
+          <td>{{ attendee.comment }}</td>
+          <td>{{attendee.dateOfBirth}}</td>
+          <td>{{attendee.shirtNumber}}</td>
+        </tr>
+      </table>
+    </div>
+   </div>
+</div>

@@ -1,0 +1,100 @@
+<html style="magin:0;padding:0;width:100%;height:100%;background:#dbdbdb;">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body style="margin:0;padding:0;width:100%;height:100%;font-family:arial;background:white">
+
+	<table style="background:#eeeeee;width:100%;">
+		<tr><td>
+			<table style="background-color:#eeeeee;color:#6d6d6d;font-size:11px;font-family:arial;margin:0 auto;width:700px;">
+				<tr>
+					<td style="width:40px;"><img src="{{{ROOT_URL}}}/img/logo-small.png" alt="logo"></td>
+					<td><img src="{{{ROOT_URL}}}/img/sportsfronter-medium.png" alt="sportsfronter"></td>
+				</tr>
+			</table>
+		</td></tr>
+	</table>
+
+	<table style="background:#ffffff;color:#3c3c30;font-size:11px;font-family:arial;width:100%;border-collapse:collapse;padding:0 10px;">
+		<tr>
+			<td>
+				<table style="font-family:arial;margin:15px auto;">
+					<tr>
+						<td>
+							<table style="width:100%;">
+								<tr>
+									<td style="font-size:13px;font-weight:bold;">{{{TITLE_MSG}}}:</td><td>
+								</tr>
+
+								<tr>
+									<td style="font-size:30px;">{{{EVENT_NAME}}}</td>
+								</tr>
+								<tr><td colspan="3" style="height:10px;"></td></tr>
+								<tr>
+									<td>
+										<a href="{{{ROOT_URL}}}{{{INVITATION_URL}}}"><img src="{{{ROOT_URL}}}/img/invitation-button.png" alt="logo"></a>
+									</td>
+								</tr>
+							</table>
+
+
+							<table style="font-family:arial;">
+								<tr><td colspan="3" style="height:10px;"></td></tr>
+								
+								<tr>
+									<td style="background-color:#eee;vertical-align:top;padding:15px; font-size:15px;">
+										<table>
+											<tr>
+												<td style="font-size:15px;font-weight:bold">Hei, {{{NAME}}}!</td>
+											</tr>
+											<tr>
+												<td style="height:10px;"></td>
+											</tr>
+											<tr>
+												<td style="font-size:15px;">Dette er en påminnelse om <strong>{{{EVENT_NAME}}}</strong>. Klikk på knappen over for å se info om arrangementet og svare på om du kommer eller ikke. </td>
+											</tr>
+											<tr>
+												<td style="height:10px"></td>
+											</tr>
+											<tr>
+												<td style="font-size:15px;">Om du bruker Google Calendar, kan du legge arrangementet til kalenderen din ved å klikke <a href="{{{CALENDAR_URL}}}">her</a></td>
+											</tr>
+										</table>
+
+									</td>
+								</tr>
+
+								<tr><td colspan="3" style="height:5px;"></td></tr>
+
+								<tr>
+									<td style="background-color:#eee;vertical-align:top;padding:15px;">
+										<table>
+											<tr>
+												<td style="font-size:15px;font-weight:bold">Om arrangementet</td>
+											</tr>
+											<tr>
+												<td style="height:10px;"></td>
+											</tr>
+											<tr>
+												<td style="font-size:15px;"><strong>Sted:</strong> {{{LOCATION}}}</td>
+											</tr>
+											<tr>
+												<td style="font-size:15px;"><strong>Dato:</strong> {{{DATE}}}</td>
+											</tr>
+											<tr>
+												<td style="font-size:15px;"><strong>Starttid:</strong> {{{TIME}}}</td>
+											</tr>
+										</table>
+									</td>												
+								</tr>
+							</table>
+
+							<p style="font-size:12px;"><strong>Invitasjonslenke</strong>: {{{ROOT_URL}}}{{{INVITATION_URL}}}</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

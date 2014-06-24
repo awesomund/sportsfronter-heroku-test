@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block "menu" %}
+<div class="navigation" ng-controller="NavbarController" ng-init="init()">
+    <div class="navwrap clearfix">
+
+      <div class="nav-btn dropdown nav-icon-btn" ng-show="show_logout">
+        <a class="dropdown-toggle">
+          <i class="glyphicon-align-justify nav-icon-btn-image"></i>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-left">
+          <li>
+            <a href="#/get_started">
+              <i class="glyphicon-info-sign dropdown-menu-icon"></i>
+              <span>Kom i gang!</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/event/all">
+              <i class="glyphicon-calendar dropdown-menu-icon"></i>
+              <span> Arrangementer</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/team/all">
+              <i class="glyphicon-users dropdown-menu-icon"></i>
+              <span>Lag</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <span class="logo-wrapper">
+        <a href="#/"><img class="logo" src="/static/webapp/img/logo-small.png"></a>
+        <a href="#/"><img class="logo" src="/static/webapp/img/sportsfronter-medium.png"></a>
+      </span>
+
+      <div class="nav-btn dropdown nav-icon-btn user-btn" ng-show="show_logout">
+        <a class="dropdown-toggle">
+          <i class="glyphicon-cog nav-icon-btn-image"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a href="#/profile"><i class="glyphicon-user dropdown-menu-icon"></i>Min profil</a></li>
+          <li ng-click="logout()"><a><i class="icon-exit dropdown-menu-icon"></i> Logg ut</a></li>
+        </ul>
+      </div> 
+      
+    </div>
+  </div>
+{% endblock %}
+
+{% block "scripts" %}
+  <script src="/static/webapp/js/angular-1.2.9.min.js?v=0.61"></script>
+  <script src="/static/webapp/js/jquery.min.js?v=0.61"></script>
+  <script src="/static/webapp/js/ui-bootstrap-tpls-0.8.0.min.js?v=0.61"></script>
+  <script src="/static/webapp/js/angular-cookies-1.2.9.min.js?v=0.61"></script>
+  <script src="/static/webapp/js/angular-route-1.2.9.min.js?v=0.61"></script>
+  <script src="/static/webapp/js/angular-touch-1.2.9.min.js?v=0.61"></script>
+ 
+  <script src="/static/webapp/js/local_settings.js?v=0.61"></script>
+  <script src="/static/webapp/js/app.js?v=0.61"></script>
+
+  <!-- services -->
+  <script src="/static/webapp/js/services/user.js?v=0.61"></script>
+  
+  <!-- Angular controllers -->
+  <script src="/static/webapp/js/controllers/navbar.js?v=0.61?"></script>
+  <script src="/static/webapp/js/controllers/management.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/login.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/signup.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/view_all_teams.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/view_team.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/rsvp.js?v=0.61"></script> 
+  <script src="/static/webapp/js/controllers/create_event.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/view_event.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/add_team.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/all_events.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/get_started.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/add_player.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/profile.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/guardian_add_player.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/team_search.js?v=0.61"></script>
+  <script src="/static/webapp/js/controllers/invite_link_new_player.js?v=0.61"></script>
+
+{% endblock %}

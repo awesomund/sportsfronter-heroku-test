@@ -1,0 +1,79 @@
+<div class="pagewrap" ng-init="init()">
+  <div class="grid">
+    <div class="col-1-2">
+      <header class="clearfix">
+      <h3 ng-hide="coach.id">Legg til ny trener</h3> 
+      <h3 ng-hide="!coach.id">{{ coach.firstName }} {{ coach.lastName }}</h3> 
+      </header>
+    </div>
+    <div class="col-1-2">
+      <h3 ng-hide="!coach.isPlayer" style="float:right;"><i class="glyphicon-bullhorn"></i>  <i class="icon-shirt"></i> Spillende trener</h3>
+    </div>
+  </div>
+  <hr>
+  <div class="well">
+    <div class="grid">
+    <form name="addCoachForm" novalidate ng-model="addCoachForm">
+
+      <div>
+        <label for="email">Epost<span class="text-error">*</span></label>
+        <div class="input-group" ng-class="{notvalid: addCoachForm.email.$invalid && submitted}">
+          <span class="input-group-addon"><i class="glyphicon-envelope"></i></span>
+          <input id="email" type="email" name="email" ng-model="coach.email" placeholder="E-postadresse"
+                 ng-blur="checkCoachEmail()" autocapitalize="off" ng-disabled="disableEmail" required/>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label for="firstname">Fornavn<span class="text-error">*</span></label>
+          <div class="input-group" ng-class="{notvalid: addCoachForm.firstname.$invalid && submitted}">
+            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+            <input id="firstname" name="firstname" type="text" placeholder="Fornavn"
+                   ng-model="coach.firstName" ng-disabled="personExists" required>
+          </div>
+        </div>
+
+        <div>
+          <label for="lastname">Etternavn<nspan class="text-error">*</span></label>
+          <div class="input-group" ng-class="{notvalid: addCoachForm.lastname.$invalid && submitted}">
+            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+            <input id="lastname" name="coach.lastname" type="text" placeholder="Etternavn" ng-model="coach.lastName"
+                   ng-disabled="personExists" required>
+          </div>
+        </div>
+
+        <div>
+          <label for="phonenumber">Telefon</label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon-phone"></i></span>
+            <input id="phonenumber" type="text" placeholder="Telefonnummer" ng-model="coach.phoneNumber"
+                   ng-disabled="personExists" >
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="col-1-1 col-padding-top">
+        <hr>
+        <button class="btn" ng-click="back()">Avbryt</button>
+        <button class="btn btn-danger" ng-click="removeAsCoach()"
+                ng-hide="coachAlreadyOnTeam || !coach.id">
+                <i class="glyphicon-trash"></i>
+        </button>
+        <button class="btn btn-primary" ng-click="saveCoach('/')" ng-hide="coach.id || coachAlreadyOnTeam">
+          <i class="glyphicon-ok"></i> Lagre
+        </button> 
+        <button class="btn btn-success" ng-hide="coach.id || coachAlreadyOnTeam" ng-click="saveCoach('/coach/')">
+          <i class="icon-circle-plus"></i>
+           Lagre og legg til flere
+        </button>         
+        <button class="btn btn-success" ng-hide="!coach.id || coach.isPlayer" ng-click="coachAsPlayer()"><i class="icon-shirt"></i>
+          Legg til som spiller
+        </button>
+      </div>
+
+  </form>
+  </div>
+  <alert ng-repeat="alert in alerts" type="alert.type" ng-click="closeAlert($index)" close="closeAlert($index)">{{alert.msg}} <strong>{{alert.comment}}</strong></alert>
+</div><!-- End pagewrap -->

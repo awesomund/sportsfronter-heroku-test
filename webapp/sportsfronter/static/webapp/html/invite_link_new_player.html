@@ -1,0 +1,129 @@
+<div class="pagewrap" ng-init="init()">
+    <div class="slim">
+        
+        <p>
+            <h1 ng-hide="showExistingPlayersForm">
+                {{teamName}}
+            </h1>
+        </p>
+
+        <p ng-hide="showExistingPlayersForm">
+            Du er registrert på laget! Under kan du se en oversikt over laget ditt:
+        </p>
+
+        <div ng-hide="showExistingPlayersForm">
+            <table class="table"> 
+              <tr>
+                <th ng-click="sortTable('firstName')">Spiller</th>
+                <th ng-click="sortTable('dateOfBirth')">Født</th>
+                <th ng-click="sortTable('phoneNumber')">#</th>
+              </tr>
+              <tr ng-repeat="teamPlayer in teamPlayers | orderBy:predicate:direction" target="_self" ng-click="selectPlayer(teamPlayer)">
+                <td>{{ teamPlayer.firstName }} {{ teamPlayer.lastName }}</td>
+                <td>{{ teamPlayer.dateOfBirth }}</td>
+                <td>{{ teamPlayer.shirtNumber }} </td> 
+              </tr>
+              <tr>
+                <th>Lagledere</th>
+                <th>Telefonnummer</th>
+                <th></th>
+              </tr>
+              <tr ng-repeat="coach in coaches">
+                <td>{{coach.firstName}} {{coach.lastName}}</td>
+                <td>{{coach.phoneNumber}}</td>
+                <td></td>
+              </tr>
+            </table>
+        </div>
+
+        <div ng-show="showExistingPlayersForm">
+
+            <h3>Eksisterende spillere</h3>
+
+            <p>Det finnes allerede en eller flere spillere med samme navn som deg:</p>
+
+            <div ng-show="showExistingPlayersForm">
+                <h4>
+                    Spillerinfo:
+                </h4>
+
+                <div class="well" ng-repeat="existingPlayer in existingPlayers">
+
+                    <div>
+                        <label>Epost/brukernavn<span class="text-error">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                            <input id="firstname" name="firstname" type="text" ng-model="existingPlayer.username" ng-disabled="true">
+                        </div>
+                    </div>
+                    <div>
+                        <label>Fornavn<span class="text-error">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                            <input id="firstname" name="firstname" type="text" ng-model="existingPlayer.firstName" ng-disabled="true">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="lastname">Etternavn<span class="text-error">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+                            <input id="lastname" name="lastname" type="text" ng-model="existingPlayer.lastName" ng-disabled="true">
+                        </div>
+                    </div>
+                    <div>
+                        <label>Telefonnummer</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-phone"></i></span>
+                            <input type="text" ng-model="existingPlayer.phoneNumber" ng-disabled="true">
+                        </div>
+                    </div>
+                    <div>
+                        <label>Fødselsdato</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                            <input type="text" ng-model="existingPlayer.dateOfBirth" ng-disabled="true">
+                        </div>
+                    </div>
+                    <p>
+                        <h4>
+                            Foresatte:
+                        </h4>
+                        <p>
+                            <table class="table" ng-show="existingPlayer.guardians">
+                                <th>Navn</th>
+                                <th>Epost</th>
+                                <tr ng-repeat="guardian in existingPlayer.guardians">
+                                    <td>
+                                        {{guardian.name}}
+                                    </td>
+                                    <td>
+                                        {{guardian.email}}
+                                    </td>
+                                </tr>
+                            </table>
+                            <div ng-hide="existingPlayer.guardians">
+                                Ingen foresatte er registrert for denne spilleren enda.
+                            </div>
+                        </p>
+                    </p>
+
+
+                <p>
+                    <p>
+                        Er dette deg?
+                    </p>
+                    <p>
+                        <button class="btn btn-large btn-block btn-primary" ng-click="mergePlayer(existingPlayer)">Ja</button>
+                        <button class="btn btn-large btn-block btn-danger" ng-click="removeExistingPlayerFromList($index)">Nei</button>
+                    </p>
+                </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <button ng-show="!existingPlayers.length" class="btn btn-primary btn-large btn-block" ng-click="finish()">OK</button>
+        
+    </div>
+</div>

@@ -1,0 +1,261 @@
+@import "bits";
+@import "bootstrap_tweaks";
+@import "bootstrap_labels";
+@import "grid";
+@import "navbar";
+@import "shame";
+
+html {
+  overflow: auto;
+}
+body {
+  overflow-x: hidden;
+}
+
+// Typography
+input.title {
+  font-size: 1.6em;
+  line-height: normal;
+  margin-bottom: 0;
+}
+
+h1 {
+  @include breakpoint(rat) {
+    font-size: 3rem;
+    margin-top: 0;
+  }
+}
+
+.attendees-container {
+  padding-left: 0px;
+  padding-right: 0px;
+  overflow-x: auto;
+}
+
+label {
+  font-weight: bold;
+  font-size: 0.8em;
+  margin-bottom: 0;
+}
+
+.attendees th {
+  background-color: whitesmoke;
+}
+
+hr {
+  clear: both;
+}
+
+i {
+  position: relative;
+  top: 1px;
+  font-weight: normal;
+
+  .input-group-addon & {
+    top: 3px;
+  }
+}
+
+#reason {
+  margin-bottom: 1px;
+}
+
+#reason-form {
+  margin-top: 10px;
+}
+
+// Progress bar 
+.progress-bar-unknown { background-color: #aaa; }
+
+// Progress bar overlay
+.progress-bar {
+  position: relative;
+
+  .overlay {
+    position: absolute;
+    left: 48%;
+    font-weight: bold;
+  }
+}
+
+//------------------------------------------------ Glyphicon Pro
+@font-face {
+  font-family: 'glyphicons';
+  src: url('../fonts/.eot');
+  src: url('../fonts/.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons.woff') format('woff'), url('../fonts/glyphicons.ttf') format('truetype'), url('../fonts/glyphicons.svg#glyphiconsregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+// Placeholder text
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder 
+{ color: #bbb; }
+
+input:-moz-placeholder,
+textarea:-moz-placeholder 
+{ color: #bbb; }
+
+input::-moz-placeholder,
+textarea::-moz-placeholder
+{ color: #bbb; }
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder
+{ color: #bbb; }
+
+//------------------------------------------------ Create event
+.send-invitation-btn, .absence-comment {
+  outline: none;
+  padding-left: 10px;
+  color: black;
+
+  &:hover {
+    color: #555;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+//------------------------------------------------ RSVP
+// In the attendees list, make the users name bolded
+.attendees tr:nth-child(2) {
+  font-weight: bold;
+}
+
+
+//------------------------------------------------ Header styling
+header {
+  h1 { float: left; }
+  a, button {
+    float: right;
+    margin-top: 15px;
+    @include breakpoint(rat) {
+      margin-top: 5px;
+      content: "";
+    }
+  }
+  .text {
+    @include breakpoint(rat) {
+      display: none;
+    }
+  }
+}
+
+//------------------------------------------------ My events
+.events {
+  td, th {
+    text-align: center;
+
+    &:first-child {
+      text-align: left;
+    }
+  }
+}
+
+.events .expired td, .events .expired a {
+  color: #999;
+  font-weight: normal;
+}
+
+table {
+  th {
+    background-color: #f9f9f9;
+  }
+  a {
+    color: black;
+    font-weight: bold;
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.clickable {
+  tr {
+    cursor: pointer;
+    
+    &:first-child {
+      cursor: default;
+    }
+  }
+
+  th:last-child, td:last-child {
+    padding-right: 40px;
+  }
+  
+  td:last-child {
+    position: relative;
+
+    &:after {
+      content: "\e224";
+      font-family: glyphicons;
+      position: absolute;
+      top: 25%;
+      right: 10px;
+      font-size: 12px;
+    }
+  }
+}
+
+//------------------------------------------------ Glyphicons
+i.glyphicon-users {
+  font-family: glyphicons;
+
+  &:after {
+    content: "\e044";
+    font-style: normal;
+  }
+}
+
+[class*='icon-'] {
+  font-family: glyphicons;
+  &:after {
+    font-style: normal;
+  }
+}
+
+i.icon-bullhorn:after    { content: "\e356"; }
+i.icon-calendar:after    { content: "\e044"; }
+i.icon-keys:after        { content: "\e045"; }
+i.icon-send:after        { content: "\e422"; }
+i.icon-phone:after       { content: "\e443"; }
+i.icon-pin-flag:after    { content: "\e338"; }
+i.icon-message-out:after { content: "\e124"; }
+i.icon-exit:after        { content: "\e389"; }
+i.icon-new-window:after  { content: "\e390"; }
+i.icon-circle-plus:after { content: "\e191"; }
+i.icon-circle-plus:after { content: "\e191"; }
+i.icon-shirt:after       { content: "\e284"; }
+i.icon-add-user:after    { content: "\e007"; }
+
+//------------------------------------------------ Landing page
+.login-group {
+  text-align: center;
+
+  em {
+    display: block;
+    font-size: 0.8em;
+  }
+}
+
+.jumbotron h1 {
+  font-size: 1.9em;
+  margin-top: 0;
+}
+
+.btn-navigation {
+  margin-top: 13px;
+}
+
+.slim {
+  margin-left:auto;
+  margin-right:auto;
+  max-width: 600px;
+}
+
+.simple-datepicker {
+  width: 32.7%;
+  display: inline-block;
+}

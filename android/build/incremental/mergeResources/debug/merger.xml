@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res" >
+            <file
+                name="ic_launcher"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/drawable/ic_launcher.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="logo"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/drawable/logo.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="sportsfronter"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/drawable/sportsfronter.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/drawable-hdpi/ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="sportsfronter"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/drawable-hdpi/sportsfronter.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="sportsfronter"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/drawable-ldpi/sportsfronter.png"
+                qualifiers="ldpi"
+                type="drawable" />
+            <file
+                name="sportsfronter"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/drawable-mdpi/sportsfronter.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="sportsfronter"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/drawable-xhdpi/sportsfronter.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="main"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/layout/main.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/values/strings.xml"
+                qualifiers="" >
+                <string name="app_name" >Sportsfronter
+                </string>
+            </file>
+            <file
+                name="config"
+                path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/res/xml/config.xml"
+                qualifiers=""
+                type="xml" />
+        </source>
+        <source path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build/res/rs/debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/build-types/debug/res" />
+    </dataSet>
+
+</merger>

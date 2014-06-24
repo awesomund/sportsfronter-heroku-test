@@ -1,0 +1,19 @@
+{% extends "webapp/base_webapp.html" %}
+
+{% block "content" %}
+  <div ng-view></div>
+{% endblock %}
+
+{% block "ios-scripts" %}
+<!-- iOS-specific resources -->
+<script type="text/javascript" charset="utf-8" src="/static/webapp/js/ios/cordova.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/webapp/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/webapp/js/ios/PushNotification.js"></script>
+<script type="text/javascript" src="/static/webapp/js/PushNotificationsIos.js"></script>
+
+<!-- Moment.js -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>
+
+<!-- Cordova Calendar plugin  -->
+<script src="static/webapp/js/ios/calendar.js"></script>
+{% endblock %}

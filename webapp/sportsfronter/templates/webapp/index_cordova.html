@@ -1,0 +1,14 @@
+{% extends "webapp/base_webapp.html" %}
+
+{% block "content" %}
+  <div ng-view></div>
+{% endblock %}
+
+{% block "cordova-scripts" %}
+  <!-- Cordova specific plugins -->
+  <script src="/static/webapp/js/cordova/cordova.js"></script>
+  <script src="/static/webapp/js/cordova/GCMPlugin.js"></script>
+  <!-- Cordova spesific controllers -->
+  <script src="/static/webapp/js/cordova/controllers.js"></script>
+  <script src="/static/webapp/js/cordova/init_gcm.js"></script>
+{% endblock %}

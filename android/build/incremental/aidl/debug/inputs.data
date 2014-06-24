@@ -1,0 +1,12 @@
+# incremental data. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1386145102000 16502 aeb88befdfbaf186927e31757a5b28bc9ac682cd /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/src/com/google/android/gcm/GCMRegistrar.java
+1386077525000 1403 74026c010adf837b6eeff8af259f5d601cc2fd49 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/src/no/iterate/sportsfronter/Sportsfronter.java
+1386145102000 12012 bcecc175e4ea26d76b549420594f1d526a8e92ee /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/src/com/google/android/gcm/GCMBaseIntentService.java
+1386145102000 144 c8c3604adb4aa86753bd7b6c149b444e2665f4c9 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/src/com/google/android/gcm/README
+1386145102000 5457 1ef3be6f0102bb1b2135058ff3c2981e44305fb5 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/src/com/google/android/gcm/GCMConstants.java
+1386145102000 2597 5ac853e8e8657e8abe2ae5d48f2818cda61a5841 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/src/no/plugin/GCM/GCMPlugin.java
+1386145102000 4242 cf5cc2ce731c8cda619a8d32f3e2a80145eea5e8 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/src/no/iterate/sportsfronter/GCMIntentService.java
+1386145102000 2211 29b484f024de2fc283f31355356daad6a9042def /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/src/com/google/android/gcm/GCMBroadcastReceiver.java
+1386077525000 144 c8c3604adb4aa86753bd7b6c149b444e2665f4c9 /Users/osmundmaheswaran/development/sommer2013-sportsfronter/android/src/no/plugin/GCM/README

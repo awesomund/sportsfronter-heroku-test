@@ -1,0 +1,73 @@
+.col-32-100 { width: 24%; }
+.col-4-100 { width: 4%; }
+
+.col-4-100.remove-parent i{
+	font-size: 1.3em;
+	position: relative;
+	top: 28px;
+	left: 10px;
+
+	&:hover {
+		color: #c65345;
+		cursor: pointer;
+	}
+}
+
+.add-parent-group h3,
+.add-parent-group button {
+	display: inline;
+}
+
+.alert {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.input-group input, select{
+	height: 36px;
+}
+
+.login-jumbotron {
+	max-width: 400px;
+	margin: 0 auto;
+	margin-top: 2em;
+
+	h1 {
+		margin-bottom: 10px;
+	}
+}
+
+.coach-as-player:hover {
+	text-decoration: none;
+}
+
+.notvalid input {
+	 border-color: #e9322d;
+  	-webkit-box-shadow: 0 0 6px #f8b9b7;
+     box-shadow: 0 0 6px #f8b9b7;
+}
+
+.notvalidtime select{
+	 border-color: #e9322d;
+  	-webkit-box-shadow: 0 0 6px #f8b9b7;
+     box-shadow: 0 0 6px #f8b9b7;
+}
+
+.sidelabel {
+	display: inline-block;
+	margin-top: 20px;
+}
+
+.event-exclamation-sign {
+	width:60px;
+	font-size: -webkit-xxx-large;
+}
+
+.inline-image-container {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.list-image {
+	margin: 10px 0px 10px;
+}

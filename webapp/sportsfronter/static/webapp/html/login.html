@@ -1,0 +1,41 @@
+<div class="pagewrap" ng-init="init()">
+	<div class="jumbotron login-jumbotron">
+		<h1>Innlogging</h1>
+
+		<div ng-show="showInviteLinkDialog">
+			<p>Du har tidligere benyttet en invitasjonslenke, uten å fullføre registreringen. Vil gå tilbake til denne registreringen?</p>
+			<a href="{{signupUrl}}"><button class="btn btn-large btn-primary btn-block">Ja, gå til registrering</button></a>
+			<div align="center">eller</div>
+			<button class="btn btn-large btn-block" ng-click="showInviteLinkDialog=false;">Nei, gå til vanlig innlogging</button>
+		</div>
+
+		<div ng-hide="showInviteLinkDialog">
+			<div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon-user"></i></span>
+				<input type="email" ng-model="username" placeholder="Brukernavn (epostadresse)"
+					   ng-enter="login()" autocapitalize="off">
+			</div>
+			<hr/>
+			<div class="input-group">
+				<span class="input-group-addon"><i class="icon-keys"></i></span>
+				<input type="password" ng-model="password" placeholder="Passord" ng-enter="login()">
+			</div>
+			<div style="font-size: 14px">
+					Glemt passordet ditt? <a ng-href="{{forgotPasswordURL}}">Klikk her!</a>
+			</div>
+			<hr>	
+			<button class="btn btn-large btn-primary btn-block" ng-click="login()">Logg inn</button>
+			<div>
+				<div align="center">eller</div>
+				<button class="btn btn-large btn-success btn-block" ng-click="redirectToSignup()">
+	        	<i class="icon-new-window"></i>
+	        	<span class="text">Registrer deg her!</span>
+	    		</button>
+			</div>
+		</div>
+
+		<alert ng-repeat="alert in alerts" type="alert.type" ng-click="closeAlert($index)" close="closeAlert($index)">
+		  <strong> {{alert.msg}}</strong>
+		</alert>
+	<div>
+</div>

@@ -1,0 +1,90 @@
+<div class="pagewrap" ng-init="init()">
+
+	<header class="clearfix">
+		<h1>Finn Lag</h1>
+	</header>
+
+	<hr>
+
+	<p ng-hide="showJoinTeamOptions">
+        <input type="text" placeholder="Skriv inn lagnavn" class="title" ng-model="searchTerm" ng-enter="search()">
+        <p ng-hide="showJoinTeamOptions">
+            <button ng-click="search()" class="btn btn-primary"><i class="glyphicon-search"></i><span class="text"> Søk</span></button>
+        </p>
+    </p>
+
+    <p>
+	    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
+	      {{alert.msg}} <strong>{{alert.comment}}</strong>
+	    </alert>
+  	</p>
+
+    <div ng-show="searchFinished && !selectedTeam && !showJoinTeamOptions">
+
+    	<hr>
+
+    	<h3>Resultater:</h3>
+
+    	<table class="table table-hover clickable" ng-show="searchResultTeams.length">
+			<tr>
+				<th>Lagnavn</th>
+				<th><span tooltip="Antall lagmedlemmer"><i class="glyphicon-users"></i></span></th>
+			</tr>
+			<tr ng-repeat="searchResultTeam in searchResultTeams" ng-click="viewTeam(searchResultTeam)" target="_self">
+				<td >{{searchResultTeam.name}}</td>
+				<td>{{searchResultTeam.numberOfPlayers}}</td>
+	     	</tr>
+	    </table>
+
+        <p ng-show="!searchResultTeams.length">
+            Ingen lag ble funnet.
+        </p>
+
+    </div>
+
+    <div ng-show="selectedTeam && !showJoinTeamOptions">
+
+    	<hr>
+
+    	<h3>{{selectedTeam.name}}</h3>
+
+    	<p><button ng-click="showJoinTeamOptions=true;" class="btn btn-success"><i class="glyphicon-plus"></i><span class="text"> Bli med på laget</span></button></p>
+
+    	<table class="table">
+    		<tr>
+    			<th>Lagledere</th>
+    		</tr>
+    		<tr ng-repeat="coach in selectedTeam.coaches">
+    			<td>
+    				{{coach.firstName}} {{coach.lastName}}
+    			</td>
+    		</tr>
+			<tr>
+				<th>Spillere</th>
+			</tr>
+			<tr ng-repeat="player in selectedTeam.players">
+				<td >{{player.firstName}} {{player.lastName}}</td>
+	     	</tr>
+	    </table>
+
+    </div>
+
+    <div class="jumbotron login-jumbotron" ng-show="selectedTeam && showJoinTeamOptions">
+
+        <h3>{{selectedTeam.name}}</h3>
+
+        <p>
+            Hva er din(e) rolle(r) på laget?
+        </p>
+        <p>
+            <input type="checkbox" ng-model="joinTeamRoles.player"> Spiller</input><br>
+            <input type="checkbox" ng-model="joinTeamRoles.guardian"> Foresatt</input><br>
+            <input type="checkbox" ng-model="joinTeamRoles.manager"> Lagleder</input><br>
+        </p>
+
+        <button class="btn btn-large btn-block btn-primary" ng-click="joinTeam()">Gå videre</button>
+        <button class="btn btn-large btn-block" ng-click="abortJoinTeam()">Avbryt</button>
+
+    </div>
+	
+</div>

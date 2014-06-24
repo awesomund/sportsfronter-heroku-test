@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sportsfronter</title>
+</head>
+<body>
+  <h1>Send en pushmelding</h1>
+  <form action="{% url 'submit' %}" method="post">
+    {% csrf_token %}
+    Overskrift: <input type="text" name="title"><br>
+    Beskjed: <input type="text" name="message"><br>
+    <select name="group">
+      {% for group in groups %}
+        <option value="{{ group.id }}">{{ group.name }}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" value="Send">
+  </form>
+</body>
+</html>

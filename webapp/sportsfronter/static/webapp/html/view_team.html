@@ -1,0 +1,88 @@
+<div class="pagewrap" ng-init="init()">
+  <header class="clearfix">
+    <h1>{{teamName}}</h1>
+  </header>
+    <hr>
+
+    <div class="well" ng-show="userIsCoach">
+      <p>
+        Del lenken under for å invitere deltakere: <br>
+        <input onclick="this.select();" type="text" value="{{inviteLink}}"></input>
+      </p>
+
+      <span style="display: inline-block; vertical-align: top;"><a href="mailto:?subject={{mailSubject}}&body={{mailBody}}"><img src="/static/webapp/img/mail-icon.png" width="50"></a></span>
+      <span style="display: inline-block; width: 70%;">Send registreringslenken til laget ditt. Da kan spillere/foresatte registrere seg selv.</span>
+
+      <p>Du kan også legge til spillere/lagledere eller hente arrangement fra NFF via knappene under.</p>
+
+    </div>
+
+    <p>
+      <button href="" class="coach-as-player btn btn-primary" ng-click="gotoCoach(0)" ng-show="userIsCoach">
+        <i class="glyphicon-plus"></i>
+        <i class="glyphicon-bullhorn"></i>
+      </button>
+      <button href="" class="btn btn-success" ng-click="createNewPlayer()" ng-show="userIsCoach">
+        <i class="glyphicon-plus"></i>
+        <i class="icon-shirt"></i> 
+      </button>
+      <button class="btn btn-primary" ng-click="goToNffPage()" style="float:right" ng-show="userIsCoach">
+        Hent terminliste fra NFF
+      </button>
+    </p>
+
+    <table class="{{tableClass}}"> 
+      <tr>
+        <th ng-click="sortTable('first_name')"><i class="icon-shirt"></i> Spiller</th>
+        <th ng-click="sortTable('dateOfBirth')">Født</th>
+        <th ng-click="sortTable('shirt_number')">#</th>
+        <th ng-click="sortTable('phone_number')">Telefon</th>
+      </tr>
+      <tr ng-repeat="player in players | orderBy:predicate:direction" ng-click="gotoPlayer(player.id)" target="_self">
+        <td>{{ player.firstName }} {{ player.lastName }}</td>
+        <td>{{ player.dateOfBirth }}</td>
+        <td>{{ player.shirtNumber }}</td>
+        <td>{{ player.phoneNumber }} </td> 
+        <!-- <td><a href="player.phone.numbers">{{ player.phone_number }}</td> -->
+      </tr>
+    </table>
+    <table class="{{tableClass}}">
+      <tr>
+        <th><i class="glyphicon-bullhorn"></i> Lagleder</th>
+        <th>Telefon</th>
+      </tr>
+      <tr ng-repeat="coach in coachs" ng-click="gotoCoach(coach.id)"  target="_self">
+        <!-- <td ng-click="gotoPlayer(coach.id)" target="_self"> -->
+        <td>{{ coach.firstName }} {{ coach.lastName }} </td>
+        <td>{{ coach.phoneNumber }}</td>
+      </tr>
+    </table>
+
+    <button class="btn btn-danger" ng-click="deleteTeam()" ng-show="userIsCoach">
+        Slett Lag
+        <i class="glyphicon-trash"></i>
+    </button>
+
+    <button class="btn btn-primary" ng-click="editTeamName=true;" ng-hide="editTeamName || !userIsCoach">
+      Endre Navn På Lag
+      <i class="glyphicon-pencil"></i>
+    </button>
+
+    <button class="btn btn-primary" ng-click="editTeamName=false;" ng-show="editTeamName">
+      Avbryt Navneendring
+      <i class="glyphicon-pencil"></i>
+    </button>
+
+    <div ng-show="editTeamName">
+      <br>
+      <div><input type="text" ng-model="newTeamName"></div>
+      <div>
+          <br>
+          <button class="btn btn-primary" ng-click="changeTeamName()">
+            Bekreft Navneendring
+          <i class="glyphicon-ok"></i>
+      </div>
+    </div>
+
+    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><strong>{{ alert.comment }}</strong>{{alert.msg}}</alert>
+  </div>

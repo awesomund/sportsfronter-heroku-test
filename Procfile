@@ -1,1 +1,1 @@
-web: gunicorn sportsfronter.wsgi
+web: gunicorn webapp/sportsfronter.wsgi

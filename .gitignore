@@ -1,0 +1,49 @@
+venv
+env
+*.pyc
+.env
+.sass-cache/
+*~
+.DS_Store
+invitasjon.ics
+nongit/
+**/*_flymake.js
+.vagrant/
+webapp/sportsfronter/settings_dev.py
+
+# JS specific
+node_modules
+
+# Android built application files
+*.apk
+*.ap_
+
+# Android files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+android/out/
+# Android IDE generated files
+android/bin/
+android/gen/
+android/out/
+
+# Android Local configuration file (sdk path, etc)
+local.properties
+
+# Android Studio
+.idea/
+.gradle
+/*/local.properties
+/*/out
+/*/*/build
+/*/*/production
+*.iml
+*.iws
+*.ipr
+*~
+*.swp
+
+webapp/sportsfronter/logfile

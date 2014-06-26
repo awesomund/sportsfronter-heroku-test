@@ -1,8 +1,10 @@
-sommer2013-sportsfronter
+sportsfronter-heroku-test
 ========================
 
 Overview
 --------
+
+This repo is created just to test keeping a synced Heroku and Github repo.
 
 This repo contains both a webapp (sportsfronter api and the web frontend) and Android and iOS apps. 
 

@@ -1,1 +1,1 @@
-web: gunicorn webapp/sportsfronter.wsgi
+web: cd webapp/ && gunicorn sportsfronter.wsgi

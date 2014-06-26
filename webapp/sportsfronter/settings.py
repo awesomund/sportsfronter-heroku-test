@@ -16,6 +16,7 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Django specific settings follows from here
 INSTALLED_APPS = (
+    'django.core.management',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

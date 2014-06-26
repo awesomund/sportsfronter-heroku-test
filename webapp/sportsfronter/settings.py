@@ -8,11 +8,9 @@
 
 import os.path
 
-import dj_database_url
-
 # Sportsfronter specific settings
-ROOT_URL = "https://sportsfronter.iterate.no"
-DOMAIN = "sportsfronter.iterate.no"
+ROOT_URL = "https://sportsfronter-test.herokuapp.com"
+DOMAIN = "sportsfronter-test.herokuapp.com"
 SSL_APPLE_DEV_CERTIFICATE_PATH = "/srv/sportsfronter.iterate.no/home/.ssl/ssl-cert-apple-dist.pem"
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -58,7 +56,11 @@ TEMPLATE_DIRS = (
 )
 
 # Parse database configuration from $DATABASE_URL or use the default
-DATABASES = {'default': dj_database_url.config(default='postgres://sf_admin:SportRocks!!!@localhost:5432/sportsfronter')}
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+  }
+}
 
 ## Email - production:
 EMAIL_HOST = 'localhost'
@@ -92,6 +94,7 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:8000',
     'localhost:8000',
     'localhost',
+    'sportsfronter-test.herokuapp.com',
 )
 CORS_ALLOW_HEADERS = (
     'X-Requested-With',

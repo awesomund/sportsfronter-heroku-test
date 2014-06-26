@@ -33,6 +33,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'rest_framework',
     'south',
+    'gunicorn',
 )
 
 MIDDLEWARE_CLASSES = (

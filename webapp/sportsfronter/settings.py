@@ -300,12 +300,9 @@ LOGGING = {
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+import dj_database_url
+db_url = 'postgres://eqyhlximszhrxx:K5hk9NQkL1yv1Iot_pJluOIL-X@ec2-54-246-97-240.eu-west-1.compute.amazonaws.com:5432/d17bnglb0m9ste'
+DATABASES = { 'default': dj_database_url.config(default=db_url) }
 
 #asd
 

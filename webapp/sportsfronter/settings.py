@@ -297,14 +297,26 @@ LOGGING = {
 }
 
 #Settings for Heroku:
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+# Parse database configuration from $DATABASE_URL
 import dj_database_url
-db_url = 'postgres://eqyhlximszhrxx:K5hk9NQkL1yv1Iot_pJluOIL-X@ec2-54-246-97-240.eu-west-1.compute.amazonaws.com:5432/d17bnglb0m9ste'
-DATABASES = { 'default': dj_database_url.config(default=db_url) }
+DATABASES['default'] =  dj_database_url.config()
 
-#asd
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 
 try:
     from settings_dev import *

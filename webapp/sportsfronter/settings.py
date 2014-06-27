@@ -299,8 +299,7 @@ LOGGING = {
 #Settings for Heroku:
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-db_url = 'postgres://sportsfronter:sportsfronter-django@localhost:5432/sportsfronter'
-DATABASES = { 'default': dj_database_url.config(default=db_url) }
+DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

@@ -132,6 +132,12 @@ Admin Username: `admin`
 Admin Password: `iterate123`
 
 
+Production/Staging - Heroku
+---------------------------
+
+Test/staging instance: http://sportsfronter-heroku-test.herokuapp.com/
+
+
 Analytics
 ---------
 Sportsfonter uses Google Analytics. Account name: Sportsfronter. To get access to the account, ask one of the devs.

@@ -301,6 +301,11 @@ LOGGING = {
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
+CurDir = os.path.dirname(os.path.abspath(__file__))
+ProjectDir = os.path.join(CurDir, "sportsfronter")
+import sys
+sys.path += [ProjectDir]
+
 try:
     from settings_dev import *
 except ImportError: pass

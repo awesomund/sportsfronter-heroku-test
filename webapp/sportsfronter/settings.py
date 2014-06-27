@@ -307,6 +307,8 @@ DATABASES = {
     }
 }
 
+#asd
+
 try:
     from settings_dev import *
 except ImportError: pass
